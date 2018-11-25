@@ -6,11 +6,13 @@
 init() {
 	level thread onPlayerConnect();
 	level getMapDefaults();
+	level teamsInit();
 }
 
 onPlayerConnect() {
 	for(;;) {
 		level waittill("connected", player);
+		player thread monitorPlayerExistance();
 		player thread onPlayerSpawned();
 	}
 }
@@ -20,8 +22,5 @@ onPlayerSpawned() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("spawned_player");
-		
-		// Will appear each time when the player spawn, that's just an exemple.
-		self iprintln("Black Ops 2 - GSC Studio | Project : ^2NewProject"); 
 	}
 }
